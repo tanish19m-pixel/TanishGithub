@@ -1,50 +1,64 @@
 # Top 1% — Your Rental Website is Ready
 
-Hi! You don't need to be technical to use this. Here's everything in plain English.
+Hi! You don't need to be technical. Follow these 2 steps and your site is live.
 
-## Your live website
+---
 
-Once deployed, your site will be at:
+## Step 1: Turn on your website (one time, 30 seconds)
 
-**https://tanish19m-pixel.github.io/TanishGithub/**
+1. Open: **https://github.com/tanish19m-pixel/TanishGithub/settings/pages**
+2. Under **Build and deployment** → **Source**, choose **Deploy from a branch**
+3. Under **Branch**, select **`gh-pages`** and folder **`/ (root)`**
+4. Click **Save**
 
-Share this link with tenants, agents, and on WhatsApp.
+Wait 1–2 minutes. Your site will be live at:
 
-## What tenants can do
+### https://tanish19m-pixel.github.io/TanishGithub/
 
-- Search rentals in Taloja (building name, sector, landmark)
-- Browse Affordable, Mid-Range, and Luxury collections
-- View property details with location scores and nearby amenities
-- Save favorites and compare properties
-- Contact you via Call or WhatsApp
+Share this link on WhatsApp, Instagram, and with tenants.
 
-## What you should update (5 minutes)
+---
 
-Open `top1-percent/frontend/src/lib/brand.ts` and change:
+## Step 2: Add your phone number (2 minutes)
 
-- **Phone number** — your real mobile number
-- **WhatsApp number** — same number (with country code, no +)
-- **Email** — your business email
-- **Office address** — your shop/office location
+1. On GitHub, open: `top1-percent/frontend/src/lib/brand.ts`
+2. Click the pencil icon (Edit)
+3. Change these to your real details:
 
-## How to go live (automatic)
-
-1. Merge the pull request on GitHub (click **Merge** on the PR)
-2. GitHub Actions will automatically build and publish your site
-3. Wait 2–3 minutes, then open the live URL above
-
-No Vercel, no server setup, no coding required.
-
-## Run locally on your computer (optional)
-
-```bash
-cd top1-percent
-npm install --prefix frontend
-npm run dev
+```ts
+phone: '919876543210',        // your number with country code 91, no +
+phoneDisplay: '+91 98765 43210',
+whatsapp: '919876543210',     // same as phone
+email: 'hello@top1percent.in',
+office: 'Your office address in Taloja',
 ```
 
-Open http://localhost:3000
+4. Click **Commit changes**
 
-## Need help?
+The site will auto-update within a few minutes.
 
-The full technical docs are in `top1-percent/README.md`. For day-to-day use, you only need to update `brand.ts` and merge the PR.
+---
+
+## What your customers can do
+
+- Search rentals by building name, sector, or landmark
+- Browse Affordable / Mid-Range / Luxury collections
+- See property scores and nearby metro, schools, hospitals
+- **Call you** or **WhatsApp you** directly from any property page
+- Save favorites and compare homes
+
+---
+
+## Need to change listings?
+
+Sample properties are in `top1-percent/frontend/src/data/properties.ts`.  
+For now, the 7 demo listings (Sai Riverdale, Paradise Sai World, etc.) are ready to show.
+
+To add your own listings later, reply in Cursor and ask to update the property data.
+
+---
+
+## Questions?
+
+- Full technical docs: `top1-percent/README.md`
+- Your code is on GitHub: https://github.com/tanish19m-pixel/TanishGithub
