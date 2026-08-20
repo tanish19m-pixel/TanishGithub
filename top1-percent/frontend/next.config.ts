@@ -1,10 +1,11 @@
 import type { NextConfig } from 'next'
 
 const isGitHubPages = process.env.GITHUB_PAGES === 'true'
+const isStaticDeploy = isGitHubPages || process.env.STATIC_EXPORT === 'true'
 const basePath = isGitHubPages ? '/TanishGithub' : ''
 
 const nextConfig: NextConfig = {
-  output: isGitHubPages ? 'export' : undefined,
+  output: isStaticDeploy ? 'export' : undefined,
   basePath,
   assetPrefix: basePath || undefined,
   trailingSlash: true,
