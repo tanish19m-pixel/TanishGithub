@@ -8,7 +8,9 @@ import { Button } from '@/components/ui/Button'
 const nav = [
   { href: '/search', label: 'Search' },
   { href: '/collections/affordable', label: 'Collections' },
-  { href: '/#highlights', label: 'Why Taloja' },
+  { href: '/#infrastructure', label: 'Projects' },
+  { href: '/#roads', label: 'Roads' },
+  { href: '/#brands', label: 'Brands' },
   { href: '/#updates', label: 'Updates' },
 ]
 
