@@ -1,0 +1,155 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  TENANT
+  AGENT
+  OWNER
+  ADMIN
+}
+
+enum ListingStatus {
+  DRAFT
+  PENDING_PAYMENT
+  PENDING_VERIFICATION
+  LIVE
+  EXPIRED
+}
+
+enum FurnishingStatus {
+  FURNISHED
+  SEMI_FURNISHED
+  UNFURNISHED
+}
+
+enum BudgetTier {
+  AFFORDABLE
+  MID_RANGE
+  LUXURY
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String?   @unique
+  phone         String?   @unique
+  name          String?
+  role          UserRole  @default(TENANT)
+  googleId      String?   @unique
+  verified      Boolean   @default(false)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  listings      Listing[]
+  favorites     Favorite[]
+  leads         Lead[]    @relation("LeadTenant")
+  agentLeads    Lead[]    @relation("LeadAgent")
+  payments      Payment[]
+}
+
+model Listing {
+  id              String          @id @default(cuid())
+  buildingName    String
+  sector          String
+  locality        String
+  landmark        String?
+  bhk             String
+  rent            Int
+  deposit         Int
+  carpetAreaSqFt  Int
+  floor           String
+  totalFloors     Int
+  furnishing      FurnishingStatus
+  parking         Boolean         @default(false)
+  petFriendly     Boolean         @default(false)
+  bachelorFriendly Boolean        @default(false)
+  familyPreferred Boolean         @default(true)
+  nearMetro       Boolean         @default(false)
+  availableFrom   DateTime
+  description     String?
+  images          String[]
+  lat             Float
+  lng             Float
+  proximity       Json?
+  score           Json?
+  budgetTier      BudgetTier
+  status          ListingStatus   @default(DRAFT)
+  verified        Boolean         @default(false)
+  expiresAt       DateTime?
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+
+  ownerId         String
+  owner           User            @relation(fields: [ownerId], references: [id])
+  favorites       Favorite[]
+  leads           Lead[]
+  payments        Payment[]
+  verifications   VerificationLog[]
+}
+
+model Favorite {
+  id        String   @id @default(cuid())
+  userId    String
+  listingId String
+  createdAt DateTime @default(now())
+
+  user      User     @relation(fields: [userId], references: [id])
+  listing   Listing  @relation(fields: [listingId], references: [id])
+
+  @@unique([userId, listingId])
+}
+
+model Lead {
+  id          String   @id @default(cuid())
+  listingId   String
+  tenantId    String
+  agentId     String
+  message     String?
+  type        String   @default("inquiry")
+  status      String   @default("new")
+  visitDate   DateTime?
+  createdAt   DateTime @default(now())
+
+  listing     Listing  @relation(fields: [listingId], references: [id])
+  tenant      User     @relation("LeadTenant", fields: [tenantId], references: [id])
+  agent       User     @relation("LeadAgent", fields: [agentId], references: [id])
+}
+
+model Payment {
+  id              String   @id @default(cuid())
+  userId          String
+  listingId       String
+  amount          Int      @default(49900)
+  currency        String   @default("INR")
+  razorpayOrderId String?
+  razorpayPaymentId String?
+  status          String   @default("pending")
+  validDays       Int      @default(90)
+  createdAt       DateTime @default(now())
+
+  user            User     @relation(fields: [userId], references: [id])
+  listing         Listing  @relation(fields: [listingId], references: [id])
+}
+
+model VerificationLog {
+  id          String   @id @default(cuid())
+  listingId   String
+  checkType   String
+  passed      Boolean
+  details     String?
+  createdAt   DateTime @default(now())
+
+  listing     Listing  @relation(fields: [listingId], references: [id])
+}
+
+model SearchLog {
+  id        String   @id @default(cuid())
+  query     String
+  userId    String?
+  createdAt DateTime @default(now())
+}

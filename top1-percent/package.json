@@ -1,0 +1,13 @@
+{
+  "name": "top1-percent",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Top 1% — Taloja's Smart Rental Marketplace",
+  "scripts": {
+    "dev": "npm run dev --prefix frontend",
+    "build": "npm run build --prefix frontend",
+    "build:pages": "GITHUB_PAGES=true npm run build --prefix frontend",
+    "start": "npm run start --prefix frontend",
+    "preview:pages": "npx serve top1-percent/frontend/out -l 3000"
+  }
+}
