@@ -1,7 +1,8 @@
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
-import { MapPin, ShieldCheck, Phone, Calendar } from 'lucide-react'
+import { ContactAgent } from '@/components/property/ContactAgent'
+import { MapPin, ShieldCheck } from 'lucide-react'
 import { getPropertyById, properties, searchProperties } from '@/data/properties'
 import { PropertyScoreDisplay } from '@/components/property/PropertyScoreDisplay'
 import { LocationIntelligence } from '@/components/property/LocationIntelligence'
@@ -9,7 +10,6 @@ import { MapView } from '@/components/property/MapView'
 import { PropertyCard } from '@/components/property/PropertyCard'
 import { GlassCard } from '@/components/ui/GlassCard'
 import { Badge } from '@/components/ui/Badge'
-import { Button } from '@/components/ui/Button'
 import { formatINR } from '@/lib/utils'
 import { PropertyActions } from '@/components/property/PropertyActions'
 
@@ -110,11 +110,15 @@ export default async function PropertyPage({ params }: { params: Promise<{ id: s
             <PropertyActions propertyId={property.id} agentName={property.agentName} />
 
             <GlassCard strong className="p-5">
-              <h3 className="font-semibold text-slate-900">Contact Agent</h3>
-              <p className="mt-1 text-sm text-slate-500">{property.agentName}</p>
-              <div className="mt-4 space-y-2">
-                <Button className="w-full"><Phone className="h-4 w-4" /> Call Agent</Button>
-                <Button variant="secondary" className="w-full"><Calendar className="h-4 w-4" /> Schedule Visit</Button>
+              <h3 className="font-semibold text-slate-900">Contact Us</h3>
+              <p className="mt-1 text-sm text-slate-500">Get in touch instantly</p>
+              <div className="mt-4">
+                <ContactAgent
+                  agentName={property.agentName}
+                  buildingName={property.buildingName}
+                  bhk={property.bhk}
+                  rent={property.rent}
+                />
               </div>
             </GlassCard>
           </div>

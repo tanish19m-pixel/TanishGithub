@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { BRAND, telUrl, mailtoUrl } from '@/lib/brand'
 
 export function Footer() {
   return (
@@ -13,8 +14,13 @@ export function Footer() {
               <span className="font-bold text-slate-900">Top 1%</span>
             </div>
             <p className="mt-3 max-w-sm text-sm text-slate-500">
-              Taloja&apos;s Smart Rental Marketplace. Verified listings, smart location intelligence,
+              {BRAND.tagline}. Verified listings, smart location intelligence,
               and trusted local agents.
+            </p>
+            <p className="mt-3 text-sm text-slate-500">
+              <a href={telUrl()} className="hover:text-brand-600">{BRAND.phoneDisplay}</a>
+              {' · '}
+              <a href={mailtoUrl('Rental Inquiry')} className="hover:text-brand-600">{BRAND.email}</a>
             </p>
           </div>
           <div>
