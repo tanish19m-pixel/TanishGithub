@@ -1,0 +1,57 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-display: "Bebas Neue", Impact, sans-serif;
+  --color-cexy-50: #fef2f2;
+  --color-cexy-100: #fee2e2;
+  --color-cexy-200: #fecaca;
+  --color-cexy-300: #fca5a5;
+  --color-cexy-400: #f87171;
+  --color-cexy-500: #ef4444;
+  --color-cexy-600: #dc2626;
+  --color-cexy-700: #b91c1c;
+  --color-cexy-800: #991b1b;
+  --color-cexy-900: #7f1d1d;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background-color: #ffffff;
+  color: #171717;
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: 0.04em;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.7s ease-out forwards;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
